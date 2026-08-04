@@ -58,10 +58,15 @@
             color: var(--accent);
         }
 
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         nav a {
             color: var(--text);
             text-decoration: none;
-            margin-left: 20px;
             font-weight: 500;
             transition: color 0.3s;
             cursor: pointer;
@@ -69,6 +74,38 @@
 
         nav a:hover, nav a.active {
             color: var(--accent);
+        }
+
+        /* Cart Icon in Header */
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            padding: 8px;
+            transition: transform 0.3s;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--text);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent);
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 50%;
+            min-width: 18px;
+            text-align: center;
         }
 
         /* Pages */
@@ -118,9 +155,33 @@
             transform: translateY(-2px);
         }
 
+        .btn-add-cart {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 20px;
+            margin-right: 10px;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .btn-add-cart.added {
+            background: var(--accent);
+            color: #000;
+        }
+
         .btn-buy {
-            width: 100%;
-            text-align: center;
+            padding: 10px 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
         }
 
         /* Products */
@@ -208,6 +269,170 @@
             color: var(--accent);
             font-weight: bold;
             margin-bottom: 15px;
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: var(--bg-card);
+            border-left: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cart-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-cart:hover {
+            color: var(--accent);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #0f0f0f;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .cart-item-info h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-info p {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quantity-btn {
+            background: var(--accent);
+            border: none;
+            color: #000;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .quantity-display {
+            font-weight: bold;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--error);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .remove-item:hover {
+            transform: scale(1.2);
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .cart-total span:last-child {
+            color: var(--accent);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 40px 20px;
+        }
+
+        /* Cart Overlay */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: none;
+        }
+
+        .cart-overlay.open {
+            display: block;
         }
 
         /* Payment Page */
@@ -404,6 +629,11 @@
             .payment-box {
                 padding: 20px;
             }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
         }
     </style>
 </head>
@@ -416,9 +646,37 @@
                 <a onclick="showPage('home')" id="nav-home" class="active">Home</a>
                 <a onclick="showPage('about')" id="nav-about">About</a>
                 <a onclick="showPage('contact')" id="nav-contact">Contact</a>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
             </nav>
         </div>
     </header>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart-msg">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">₹0</span>
+            </div>
+            <button class="btn checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            <button class="btn" style="width: 100%; background: transparent; border: 1px solid var(--border); color: var(--text);" onclick="clearCart()">Clear Cart</button>
+        </div>
+    </div>
 
     <!-- HOME PAGE -->
     <main id="home" class="page active">
@@ -435,9 +693,7 @@
                 <h2>Available Cards</h2>
                 <div class="card-grid">
 
-
-
-<!-- Card 1 -->
+                    <!-- Card 1 -->
                     <div class="product-card">
                         <div class="gift-card-visual">
                             <div class="card-chip"></div>
@@ -446,12 +702,16 @@
                                 <span>CVV: XXX</span>
                                 <span>Expiry: XX/XX</span>
                             </div>
-                            <div class="card-balance">Balance= Rs. 2400</div>
+                            <div class="card-balance">Balance= Rs. 2200</div>
                         </div>
-                        <h3>Unknown catagory</h3>
+                        <h3>Unknown Category</h3>
                         <p class="price">₹500</p>
-                        <button class="btn btn-buy" onclick="showPage('')">Out of Stock</button>
+                        <div class="btn-group">
+                            <button class="btn btn-add-cart" onclick="addToCart('Unknown Category', 500, this)">Add to Cart</button>
+                            <button class="btn btn-buy" onclick="showPage('payment')">Buy Now</button>
+                        </div>
                     </div>
+
                     <!-- Card 2 -->
                     <div class="product-card">
                         <div class="gift-card-visual">
@@ -465,7 +725,10 @@
                         </div>
                         <h3>Standard Card</h3>
                         <p class="price">₹800</p>
-                        <button class="btn btn-buy" onclick="showPage('payment')">Buy Now</button>
+                        <div class="btn-group">
+                            <button class="btn btn-add-cart" onclick="addToCart('Standard Card', 800, this)">Add to Cart</button>
+                            <button class="btn btn-buy" onclick="showPage('payment')">Buy Now</button>
+                        </div>
                     </div>
 
                     <!-- Card 3 -->
@@ -479,12 +742,15 @@
                             </div>
                             <div class="card-balance">Balance= Rs. 15670</div>
                         </div>
-                        <h3>Standerd Card</h3>
+                        <h3>Standard Card</h3>
                         <p class="price">₹1600</p>
-                        <button class="btn btn-buy" onclick="showPage('payment')">Buy Now</button>
+                        <div class="btn-group">
+                            <button class="btn btn-add-cart" onclick="addToCart('Standard Card Premium', 1600, this)">Add to Cart</button>
+                            <button class="btn btn-buy" onclick="showPage('payment')">Buy Now</button>
+                        </div>
                     </div>
 
-<!-- Card 4 -->
+                    <!-- Card 4 -->
                     <div class="product-card">
                         <div class="gift-card-visual">
                             <div class="card-chip"></div>
@@ -497,9 +763,11 @@
                         </div>
                         <h3>VISA Card</h3>
                         <p class="price">₹3200</p>
-                        <button class="btn btn-buy" onclick="showPage('')"> Currently Unavailable</button>
+                        <div class="btn-group">
+                            <button class="btn btn-add-cart" onclick="addToCart('VISA Card', 3200, this)" disabled style="opacity: 0.5; cursor: not-allowed;">Currently Unavailable</button>
+                            <button class="btn btn-buy" onclick="showPage('')" disabled style="opacity: 0.5; cursor: not-allowed;">Buy Now</button>
+                        </div>
                     </div>
-
 
                     <!-- Card 5 -->
                     <div class="product-card">
@@ -514,7 +782,10 @@
                         </div>
                         <h3>Master Card</h3>
                         <p class="price">₹4600</p>
-                        <button class="btn btn-buy" onclick="showPage('payment')">Buy Now</button>
+                        <div class="btn-group">
+                            <button class="btn btn-add-cart" onclick="addToCart('Master Card', 4600, this)">Add to Cart</button>
+                            <button class="btn btn-buy" onclick="showPage('payment')">Buy Now</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -633,16 +904,17 @@
     </footer>
 
     <script>
+        // Cart State
+        let cart = [];
+        let isCartOpen = false;
+
         // Page navigation
         function showPage(pageId) {
-            // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
-            // Show selected page
             document.getElementById(pageId).classList.add('active');
 
-            // Update nav active state (only for home, about, contact)
             document.querySelectorAll('nav a').forEach(link => {
                 link.classList.remove('active');
             });
@@ -655,8 +927,8 @@
                 document.getElementById('nav-contact').classList.add('active');
             }
 
-            // Scroll to top
             window.scrollTo(0, 0);
+            toggleCart(false);
         }
 
         function scrollToProducts() {
@@ -666,17 +938,135 @@
             }, 100);
         }
 
-        // Payment form submission - always show error
+        // Cart Functions
+        function toggleCart(forceState = null) {
+            const sidebar = document.getElementById('cartSidebar');
+            const overlay = document.getElementById('cartOverlay');
+            
+            if (forceState !== null) {
+                isCartOpen = forceState;
+            } else {
+                isCartOpen = !isCartOpen;
+            }
+
+            if (isCartOpen) {
+                sidebar.classList.add('open');
+                overlay.classList.add('open');
+            } else {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+            }
+        }
+
+        function addToCart(name, price, button) {
+            // Check if item already exists in cart
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+            }
+
+            // Visual feedback
+            button.classList.add('added');
+            button.textContent = 'Added ✓';
+            
+            setTimeout(() => {
+                button.classList.remove('added');
+                button.textContent = 'Add to Cart';
+            }, 1500);
+
+            updateCartDisplay();
+            toggleCart(true);
+        }
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+
+            // Update cart count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            // Update cart items
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="empty-cart-msg">Your cart is empty</div>';
+            } else {
+                cartItemsContainer.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h3>${item.name}</h3>
+                            <p>₹${item.price}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="quantity-control">
+                                <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                                <span class="quantity-display">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                            </div>
+                            <button class="remove-item" onclick="removeFromCart(${index})">🗑️</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Update total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = `₹${total}`;
+        }
+
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            
+            updateCartDisplay();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartDisplay();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Set the amount in the payment form
+            document.getElementById('amount').value = total;
+            
+            // Show cart items in a summary (optional - you can enhance this)
+            const itemsSummary = cart.map(item => `${item.name} x${item.quantity}`).join('\n');
+            alert(`Proceeding to checkout with:\n\n${itemsSummary}\n\nTotal: ₹${total}`);
+            
+            showPage('payment');
+        }
+
+        // Payment form submission
         const paymentForm = document.getElementById('paymentForm');
         const errorMsg = document.getElementById('errorMsg');
 
         if (paymentForm && errorMsg) {
             paymentForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-
-                // Always show error
                 errorMsg.style.display = 'block';
-
                 window.scrollTo(0, 0);
             });
         }
@@ -690,6 +1080,9 @@
                 contactForm.reset();
             });
         }
+
+        // Initialize cart display
+        updateCartDisplay();
     </script>
 </body>
 </html>
